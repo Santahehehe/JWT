@@ -35,12 +35,15 @@ public class SecurityConfig {
 		                .anyRequest().authenticated()
 		        )
 		        //快速啟用SpringSecurity的表單登入功能，適合在開發測試階段使用		        
-		        .formLogin(Customizer.withDefaults())
-//		        .formLogin(form ->form
-//		        	.loginPage("http://localhost:3000/FrontEnd/login.html")
-//		            .defaultSuccessUrl("/current")      // 登入成功後跳轉的頁面
-//		            
-//		        )
+//		        .formLogin(Customizer.withDefaults())
+		        .formLogin(form ->form
+		        	.loginPage("http://localhost:3000/FrontEnd/login.html")
+		        	.usernameParameter("username")
+		            .passwordParameter("password")
+		            .loginProcessingUrl("/login")  // 自定義登入 URL
+		            .defaultSuccessUrl("/current")// 登入成功後跳轉的頁面
+		            .permitAll()
+		        )
 		        .cors()//啟用CORS，才能啟用webconfig的配置，因為spring security跟webconfig的配置是分開的
 		        .and()
 		        //停	用 CSRF 保護

@@ -31,24 +31,31 @@ public class MyController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    //登入API
-    @PostMapping("/login")
-    public MemberPo login(@RequestBody MemberPo memberPo, HttpServletRequest request) {
-        try {
-            Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                    memberPo.getUsername(), 
-                    memberPo.getPassword()
-                )
-            );
-         
-            
-            // 假設這裡返回 token（你可以整合 JWT）
-            return memberPo;
-        } catch (AuthenticationException e) {
-            return memberPo;
-        }
-    }
+//    //登入API
+//    @PostMapping("/login")
+//    public MemberPo login(@RequestBody MemberPo memberPo, HttpServletRequest request) {
+//        try {
+//            Authentication authentication = authenticationManager.authenticate(
+//                new UsernamePasswordAuthenticationToken(
+//                    memberPo.getUsername(), 
+//                    memberPo.getPassword()
+//                )
+//            );
+//         
+//         // 將認證結果放入 SecurityContext
+//            SecurityContextHolder.getContext().setAuthentication(authentication);
+//            
+//            // 如果你正在使用 Session 驗證，將 SecurityContext 存儲在 HttpSession 中
+//            HttpSession session = request.getSession(true); // 確保 Session 存在
+//            session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
+//            
+//            System.out.println(SecurityContextHolder.getContext().getAuthentication());
+//            // 假設這裡返回 token（你可以整合 JWT）
+//            return memberPo;
+//        } catch (AuthenticationException e) {
+//            return memberPo;
+//        }
+//    }
     
     //用來看現在的session
     @GetMapping("/current")
