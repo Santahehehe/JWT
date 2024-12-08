@@ -3,6 +3,8 @@ package com.example.JWT;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +21,8 @@ public class MyController {
     //用來加密密碼    
     @Autowired
     private PasswordEncoder passwordEncoder;
+    
+    
     
     @PostMapping("/members")
     public MemberPo createMember(@RequestBody MemberPo member) {
@@ -44,7 +48,10 @@ public class MyController {
 
     @RequestMapping("/getEmail")
     public String getEmail() {
-        return "有權限的人都可進";
+    	Authentication authentication = 
+                SecurityContextHolder.getContext().getAuthentication();
+    	MyUser myUser = (MyUser) authentication.getPrincipal();
+        return myUser.getEmail();
     }
 
     @RequestMapping("/user")

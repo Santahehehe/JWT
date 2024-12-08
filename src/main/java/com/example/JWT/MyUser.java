@@ -23,6 +23,7 @@ public class MyUser implements UserDetails {
 	public List<SimpleGrantedAuthority> getAuthorities(){
 		List<SimpleGrantedAuthority> authorities = 
 				Arrays.stream(memberPo.getAuthority().split(",")).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+		System.out.println(authorities);
 		return authorities;
 	}
 	
