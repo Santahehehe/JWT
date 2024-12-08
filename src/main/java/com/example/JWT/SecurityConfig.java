@@ -73,22 +73,5 @@ public class SecurityConfig {
     }
 	
 	
-	@Autowired
-	private MemberRepo memberRepo;
-	
-    public MemberPo initmember() {
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		String encryptedPassword = encoder.encode("111");
-		System.out.println("Encrypted Password:"+encryptedPassword);
-		
-		
-		MemberPo memberPo = new MemberPo();
-		memberPo.setEmail("111@gmail.com");
-		memberPo.setUsername("user1");
-		memberPo.setPassword(encryptedPassword);
-		memberPo.setAuthority("ADMIN,USER");
-		memberRepo.save(memberPo);
-		return memberPo;
-	}
 	
 }
